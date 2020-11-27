@@ -114,7 +114,7 @@ git log
 git log --pretty=oneline
 ```
 
-![](../images/git_log.png)
+![](../images/git_log.jpg)
 
 > commit后面一大串是```commit id```(版本号)
 
