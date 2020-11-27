@@ -114,7 +114,7 @@ git log
 git log --pretty=oneline
 ```
 
-<img src = '../images/git log.png' align='left'>
+![](../images/git log.png)
 
 > commit后面一大串是```commit id```(版本号)
 
@@ -149,7 +149,7 @@ git reset --hard 未来版本号(版本号没必要写全，前几位就可以�
 
 **版本库**
 
-<img src='../images/work_stage.jpg' align='left'/>
+![](../images/work_stage.jpg)
 
 ​		工作区一次隐藏目录```.git```，就是git的版本库。版本库有很多东西，最重要的就是称为stage(或叫index)的暂存区，还要git自动创建的第一个分支```master```，以及指向```master```的一个指针叫```HEAD```
 
