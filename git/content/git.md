@@ -235,6 +235,13 @@ git checkout -- filename
   # 后续简化推送命令
   git push origin master
   ```
+  
+  **【注意】**github默认分支名master已更改为main分支，导致推送命令更改为
+  
+  ```bash
+  # 将master分支替换为main分支
+  git push origin main
+  ```
 
 #### 4.2 从远程库克隆(方便)
 
