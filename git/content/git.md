@@ -64,7 +64,7 @@ git最早是在linux上开发的，很长一段时间内，现在git可以在lin
 2. 初始化仓库，将这个目录编程git可以管理的仓库
 
    ```bash
-   // cd c_learn
+   # cd c_learn
    git init
    ```
 
@@ -114,7 +114,7 @@ git log
 git log --pretty=oneline
 ```
 
-![](../images/git log.png)
+![](../images/git_log.png)
 
 > commit后面一大串是```commit id```(版本号)
 
@@ -236,7 +236,7 @@ git checkout -- filename
   git push origin master
   ```
   
-  **【注意】**github默认分支名master已更改为main分支，导致推送命令更改为
+  【注意】github默认分支名master已更改为main分支，导致推送命令更改为
   
   ```bash
   # 将master分支替换为main分支
