@@ -265,6 +265,11 @@ git add readme.txt
 git commit -m "wrote a readme file"
 ```
 
+```bash
+# 一次性提交所有暂存区改动的文件到版本库
+git commit -am "commit message"
+```
+
 #### 3.3 查看工作区状态
 
 ```bash
@@ -288,9 +293,7 @@ git diff
 git diff   --name-status
 ```
 
-
-
-#### 3.4 版本回退
+#### 3.4 版本回退(查看日志)
 
 在工作中，可能会每次修改然后提交，可以通过```git log```来查看历史记录
 
@@ -461,7 +464,121 @@ git mv
 
 ---
 
+**推送到远端仓库**
+
+```bash
+git push origin branch_name
+```
+
 ### 5.分支管理
+
+#### 5.1 查看分支名称
+
+```bash
+# 查看本地工程所有的分支名称，"*"表示--当前工作区所在的分支
+git branch
+```
+
+```bash
+# 查看远端服务器上拥有哪些分支
+git branch -r
+```
+
+```bash
+# 查看远端服务器和本地工程所有的分支
+git branch -a
+```
+
+#### 5.2 分支管理
+
+- 新建分支
+
+```bash
+# 新建分支，但不会切换到新分支
+git branch new_branch_name
+```
+
+```bash
+# 新建分支，并自动切换到新分支
+git checkout -b new_branch_name
+```
+
+- 切换分支(官方叫法：**检出**)
+
+```bash
+# 切换到另一个已有分支
+git checkout branch_name
+```
+
+```bash
+# 强制切换(当前分支工作区存在修改而未提交的文件，与目的分支上的内容冲突，会导致checkout切换失败)
+git checkout -f branch_name
+```
+
+- 删除分支
+
+```bash
+# 删除本地分支
+git branch -d branch_name
+git branch -D branch_name # 强制删除
+```
+
+```bash
+# 删除服务器上的远程分支，branch_name为本地分支名
+git branch -d -r branch_name
+# 删除后，还要推送到服务器上才行
+git push origin : branch_name
+```
+
+- 更新本地分支
+
+> git pull 的作用：从远端服务器获取某个分支的更新，再与本地指定的分支进行自动合并
+
+```bash
+git pull origin remote_branch_name:local_branch_name
+```
+
+```bash
+# 如果远程指定的分支名和本地指定的分支名相同，则可直接执行
+git pull origin remote_branch
+```
+
+> git fetch的作用：从远端服务器中获取某个分支的更新到本地仓库
+
+**注：**与git pull不同，git fetch在获取更新后，并不会进行合并，这样留给用户一个操作空间，确认git fetch内容符合预期后，再决定是否手动合并节点(git merge)
+
+```bash
+git fetch origin remote_branch_name:local_branch_name
+```
+
+```bash
+# 如果远程指定的分支名和本地指定的分支名相同，则可直接执行
+git fetch origin remote_branch
+```
+
+- 分支合并
+
+> **git merge**命令是用于从指定的分支(节点)合并到当前分支的操作
+
+> git会将指定的分支与当前的分支进行比较，找出两者最近的一个共同节点base，之后将指定分支在base之后分离的节点合并到当前分支上。分支合并，实际上是分支间差异提交节点的合并。
+
+```bash
+git merge branch_name
+```
+
+
+
+> **git rebase**用于合并目标分支内容到当前分支
+
+> 如果要将其他分支的提交节点合并到当前分支，那么git rebase和git merge都可以达到目的
+
+```bash
+git rebase branch_name
+```
+
+
+
+**注：**```git merge```和```git rebase```背后的实现机制和对合并节点造成的影响有很大差异，有各自存在的风险。
 
 [分支管理教程地址](https://www.liaoxuefeng.com/wiki/896043488029600)
 
