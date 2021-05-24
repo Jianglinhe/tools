@@ -300,15 +300,16 @@ git diff   --name-status
 ```bash
 # 显示从最近到最远的日志
 git log
-# 如果嫌输出的信息泰国，可以加上 --pretty=oneline参数
+# 如果嫌输出的信息太多，可以加上 --pretty=oneline参数
 git log --pretty=oneline
+git log -3 # 显示最近的三条记录
 ```
 
 ![](../images/git_log.jpg)
 
 > commit后面一大串是```commit id```(版本号)
 
-**退回版本**
+**退回版本**(撤销提交节点)
 
 在git中，用<font color='green'>```HEAD```</font>表示当前版本，也就是最近一次提交的那个版本，上一个版本就是<font color='green'>```HEAD^```</font>，上上一个版本就是<font color='green'>```HEAD^^```</font>，往上100个版本就是<font color='green'>```HEAD~100```</font>
 
@@ -354,8 +355,10 @@ git reset --hard 未来版本号(版本号没必要写全，前几位就可以�
 
 #### 3.7 撤销修改
 
+> 用于回退本地所有修改而未提交的文件内容
+
 ```bash
-git checkout -- file
+git checkout -filename
 ```
 
 - 一种是```file```自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态
