@@ -261,6 +261,7 @@ git config --global core.quotepath false
 ```bash
 # 1.使用 git add 将文件添加到暂存区
 git add readme.txt 
+git add . # 可以将所有待添加的文件都进行添加
 # 2.使用 git commit 告诉git，把文件提交到仓库
 git commit -m "wrote a readme file"
 ```
@@ -268,6 +269,13 @@ git commit -m "wrote a readme file"
 ```bash
 # 一次性提交所有暂存区改动的文件到版本库
 git commit -am "commit message"
+# -am 实际上是 -a -m的缩写
+```
+
+```bash
+# 如果上次commit时备注的信息太少，想要修改
+git commit --amend
+# 会进入vim模式，可以对最后一次提交的信息进行重新修改备注
 ```
 
 #### 3.3 查看工作区状态
@@ -303,6 +311,7 @@ git log
 # 如果嫌输出的信息太多，可以加上 --pretty=oneline参数
 git log --pretty=oneline
 git log -3 # 显示最近的三条记录
+git log --name-status # 可以查看更多信息
 ```
 
 ![](../images/git_log.jpg)
@@ -355,10 +364,10 @@ git reset --hard 未来版本号(版本号没必要写全，前几位就可以�
 
 #### 3.7 撤销修改
 
-> 用于回退本地所有修改而未提交的文件内容
+> 用于回退本地所有修改而未提交的文件内容(**谨慎使用**)
 
 ```bash
-git checkout -filename
+git checkout -- filename
 ```
 
 - 一种是```file```自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态
@@ -429,7 +438,7 @@ git mv
   git push -u origin master
   ```
 
-  远程仓库的名字就是```origin```，这是git默认叫法。```git push```命令，实际上是把当前分支```master```推送到远程，由于远程仓库是空的，第一次推送```master```分支是，加上```-u```参数，会将本地```master```和远程```master```分支关联起来，后续的推送或拉取可以简化命令
+  远程仓库的名字默认就是```origin```，这是git默认叫法。```git push```命令，实际上是把当前分支```master```推送到远程，由于远程仓库是空的，第一次推送```master```分支时，加上```-u```参数，会将本地```master```和远程```master```分支关联起来，后续的推送或拉取可以简化命令
 
   ```bash
   # 后续简化推送命令
@@ -535,7 +544,7 @@ git push origin : branch_name
 
 - 更新本地分支
 
-> git pull 的作用：从远端服务器获取某个分支的更新，再与本地指定的分支进行自动合并
+> ```git pull ```的作用：从远端服务器获取某个分支的更新，再与本地指定的分支进行自动合并
 
 ```bash
 git pull origin remote_branch_name:local_branch_name
@@ -546,7 +555,7 @@ git pull origin remote_branch_name:local_branch_name
 git pull origin remote_branch
 ```
 
-> git fetch的作用：从远端服务器中获取某个分支的更新到本地仓库
+> ```git fetch```的作用：从远端服务器中获取某个分支的更新到本地仓库(**相对更加安全**)
 
 **注：**与git pull不同，git fetch在获取更新后，并不会进行合并，这样留给用户一个操作空间，确认git fetch内容符合预期后，再决定是否手动合并节点(git merge)
 
