@@ -278,6 +278,8 @@ git commit --amend
 # 会进入vim模式，可以对最后一次提交的信息进行重新修改备注
 ```
 
+**注:**修改提交描述后，需要同步到服务器的远程分支
+
 #### 3.3 查看工作区状态
 
 ```bash
@@ -523,6 +525,8 @@ git branch new_branch_name
 git checkout -b new_branch_name
 ```
 
+**注:**拉一个新分支，实际上将历史的提交节点从原分支上继承过来，同时工作区的内容是一模一样。
+
 - 切换分支(官方叫法：**检出**)
 
 ```bash
@@ -583,12 +587,14 @@ git fetch origin remote_branch
 > git会将指定的分支与当前的分支进行比较，找出两者最近的一个共同节点base，之后将指定分支在base之后分离的节点合并到当前分支上。分支合并，实际上是分支间差异提交节点的合并。
 
 ```bash
-git merge branch_name
+# 当前分支为main
+# 将branch_name分支合并到main分支上
+git merge branch_name main(可以省略，默认是自己)
 ```
 
 
 
-> **git rebase**用于合并目标分支内容到当前分支
+> **git rebase**用于合并目标分支内容到当前分支(**绝对不要在公共主分支上进行git rebase**)
 
 > 如果要将其他分支的提交节点合并到当前分支，那么git rebase和git merge都可以达到目的
 
@@ -601,4 +607,26 @@ git rebase branch_name
 **注：**```git merge```和```git rebase```背后的实现机制和对合并节点造成的影响有很大差异，有各自存在的风险。
 
 [分支管理教程地址](https://www.liaoxuefeng.com/wiki/896043488029600)
+
+
+
+#### 5.3 本地分支合并过程中的冲突管理
+
+> 冲突产生的原因：两个分支有差异的节点，两个分支差异的节点中**修改同一个文件中相近的行或者同一行**
+
+此时：会提示产生冲突的文件，需要解决冲突后再提交。分支后会变成(main|MERGING)
+
+**解决方式:**
+
+1. ```git status```查看状态，会看到Unmerged paths
+2. 进如提示的相应文件进行逐一修改，此时冲突文件里的内容会发生变化，两边都不认识。改成你想要的结果。
+3. 再次使用```git status```查看状态，此时有提示```git add <file>...```
+4. 然后进行```git commit -am " "```
+5. 最后```git log```，可以看到生成新的提交节点(修改了内容)，差异节点也会merge过来
+
+#### 5.4 查看最近操作
+
+```bash
+git reflog
+```
 
