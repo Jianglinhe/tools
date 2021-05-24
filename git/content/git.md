@@ -311,6 +311,7 @@ git log
 # 如果嫌输出的信息太多，可以加上 --pretty=oneline参数
 git log --pretty=oneline
 git log -3 # 显示最近的三条记录
+
 git log --name-status # 可以查看更多信息
 ```
 
@@ -364,10 +365,17 @@ git reset --hard 未来版本号(版本号没必要写全，前几位就可以�
 
 #### 3.7 撤销修改
 
+<<<<<<< HEAD
 > 用于回退本地所有修改而未提交的文件内容(**谨慎使用**)
 
 ```bash
 git checkout -- filename
+=======
+> 用于回退本地所有修改而未提交的文件内容
+
+​```bash
+git checkout -filename
+>>>>>>> 8ac170fdf82722b7f36dc44c93a18b955dee06b2
 ```
 
 - 一种是```file```自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态
